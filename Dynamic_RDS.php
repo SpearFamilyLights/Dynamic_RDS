@@ -916,7 +916,7 @@ function displayLogsSection(): void {
 <p>
 <input onclick="ViewFileImpl('api/file/logs/plugin-Dynamic_RDS.log', 'plugin-Dynamic_RDS.log');"
        class="buttons" type="button" value="View All" />
-<input onclick="ViewFileImpl('api/file/logs/plugin-Dynamic_RDS.log?tail=50', 'plugin-Dynamic_RDS.log');"
+<input onclick="ViewFileImpl('api/file/logs/plugin-Dynamic_RDS.log?tail=40', 'plugin-Dynamic_RDS.log');"
        class="buttons" type="button" value="View Recent" /></p>
 </div>
 <br />
@@ -928,15 +928,17 @@ function displayLogsSection(): void {
  */
 function displayReportIssueSection(): void {
     ?>
-<h2>Report an Issue</h2>
+<h2>Report an Issue / Make a Suggestion</h2>
 <div class="container-fluid settingsTable settingsGroupTable">
+<p>Have a suggestions to make Dynamic RDS better or more useful? Feel free to create a new issue at <a href="https://github.com/ShadowLight8/Dynamic_RDS/issues"><b>https://github.com/ShadowLight8/Dynamic_RDS/issues</b></a></p>
+<p>To report an issue<br />
+First, increase the Log Levels to Debug, then create a new issue at <a href="https://github.com/ShadowLight8/Dynamic_RDS/issues"><b>https://github.com/ShadowLight8/Dynamic_RDS/issues</b></a>, describe what you're seeing, and attach the zip file.</p>
 <p>
 <form action="plugin.php?_menu=status&plugin=Dynamic_RDS&page=Dynamic_RDS.php&nopage" method="post">
 <button name="DownloadZip" type="Submit" class="buttons" value="Download log and config zip">
 <i class="fas fa-fw fa-nbsp fa-download"></i>Download log and config zip
 </button>
 </form></p>
-<p>Increase the Log Levels to Debug, then create a new issue at <a href="https://github.com/ShadowLight8/Dynamic_RDS/issues"><b>https://github.com/ShadowLight8/Dynamic_RDS/issues</b></a>, describe what you're seeing, and attach the zip file.</p>
 Zip file includes:
 <ul>
 <li>Log - <code>plugin-Dynamic_RDS.log</code> (plus rotated copies, if present)</li>
