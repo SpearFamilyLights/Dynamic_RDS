@@ -29,6 +29,7 @@
                 "DynRDSQN8066Gain",
                 "DynRDSQN8066SoftClipping",
                 "DynRDSQN8066AGC",
+                "DynRDSQN8066Mono",
                 "DynRDSSi4713TestAudio"
             ]
         },
@@ -97,6 +98,7 @@
                   "DynRDSQN8066Gain",
                   "DynRDSQN8066SoftClipping",
                   "DynRDSQN8066AGC",
+                  "DynRDSQN8066Mono",
                   "DynRDSQN8066ChipPower",
                   "DynRDSQN8066PIPWM",
                   "DynRDSQN8066AmpPower"
@@ -295,6 +297,20 @@
             "checkedValue": "1",
             "uncheckedValue": "0",
             "default": 0,
+            "suffix": "<i class='fas fa-fw fa-bolt fa-nbsp ui-level-1'></i>"
+        },
+        "DynRDSQN8066Mono": {
+            "name": "DynRDSQN8066Mono",
+            "description": "Stereo / Mono",
+            "tip": "Mono transmits a single L+R channel with no stereo subcarrier. Receivers at the edge of coverage get a cleaner signal in mono. RDS is not affected.",
+            "restart": 0,
+            "reboot": 0,
+            "type": "select",
+            "options": {
+                "Stereo (default)": "0",
+                "Mono": "1"
+            },
+            "default": "0",
             "suffix": "<i class='fas fa-fw fa-bolt fa-nbsp ui-level-1'></i>"
         },
         "DynRDSSi4713TestAudio": {

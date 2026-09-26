@@ -43,11 +43,11 @@ class QN8066(Transmitter):
     self.I2C.write(0x19, [0b00100000 | tempFreq>>8], True)
     self.I2C.write(0x1b, [0b11111111 & tempFreq], True)
 
-    # Enable RDS TX and set pre-emphasis
-    if config['DynRDSPreemphasis'] == "50us":
-      self.I2C.write(0x01, [0b00000000 | int(config['DynRDSEnableRDS'])<<6])
-    else:
-      self.I2C.write(0x01, [0b00000001 | int(config['DynRDSEnableRDS'])<<6])
+    # SYSTEM2 (0x01) - Enable RDS TX (bit 6), select stereo/mono (bit 4, 0 = Stereo / 1 = Mono), set pre-emphasis (bit 0, 0 = 50us / 1 = 75us)
+    system2 = int(config['DynRDSEnableRDS'])<<6 | int(config['DynRDSQN8066Mono'])<<4
+    if config['DynRDSPreemphasis'] != "50us":
+      system2 |= 0b00000001
+    self.I2C.write(0x01, [system2])
 
     # Exit standby, enter TX
     self.I2C.write(0x00, [0b00001011], True)
@@ -73,6 +73,11 @@ class QN8066(Transmitter):
     if config['DynRDSQN8066AGC'] == '0':
       self.I2C.write(0x6e, [0b10110111], True)
     # TODO: Else if it is re-enabled
+
+    # Stereo / Mono selection - SYSTEM2 (0x01) bit 4 tx_mono (0 = Stereo, 1 = Mono)
+    # Read-modify-write so pre-emphasis, RDS enable, and the RDS ready toggle bit (used by transmitRDS) are preserved
+    system2 = self.I2C.read(0x01, 1)[0]
+    self.I2C.write(0x01, [system2 & 0b11101111 | int(config['DynRDSQN8066Mono'])<<4], True)
 
     # TX gain changes and input impedance
     self.I2C.write(0x28, [int(config['DynRDSQN8066SoftClipping'])<<7 | int(config['DynRDSQN8066BufferGain'])<<4 | int(config['DynRDSQN8066DigitalGain'])<<2 | int(config['DynRDSQN8066InputImpedance'])], True)
